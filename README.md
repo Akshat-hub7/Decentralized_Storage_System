@@ -18,4 +18,64 @@ Hosting content in censorship-resistant environments.
 This project aims to redefine how data is stored and accessed, empowering users with trustless technology that aligns with Web3 principles. By integrating with blockchain ecosystems like Telos EVM or others, it facilitates interoperability and smart contract integration for enhanced utility.
 
 Blockchain Platform:- Metamask   ,
-Contract address:-0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8
+Contract address:-0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8    ,
+Smart Contract ABI:- [
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "data",
+				"type": "string"
+			}
+		],
+		"name": "DataStored",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_data",
+				"type": "string"
+			}
+		],
+		"name": "storeTimeCapsule",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getStoredData",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "storedData",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
