@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Time Capsule</title>
+  <style>
+    /* Ensure the page works well with Vanta background */
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* Prevent scrolling */
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+
+    /* The Vanta background container */
+    #vanta-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    /* Form container styles */
+    .content {
+      position: relative; /* Keeps the form above the Vanta background */
+      z-index: 1; /* Ensure this is on top of the background */
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+      border-radius: 10px;
+      color: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .input-container {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, button, a {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #3498db; /* Blue color for the button */
+      color: white;
+      cursor: pointer;
+    }
+
+    a {
+      text-align: center;
+      display: block;
+      color: #3498db; /* Blue link color */
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Vanta.js Background -->
+  <div id="vanta-bg"></div>
+
+  <!-- Form Content -->
+  <div class="content">
+    <h1>Decentralized Storage System</h1>
+    <form id="timeCapsuleForm">
+      <div class="input-container">
+        <label for="photos">Photos:</label>
+        <input type="file" id="photos" accept="image/*" multiple>
+      </div>
+      <div class="input-container">
+        <label for="videos">Videos:</label>
+        <input type="file" id="videos" accept="video/*" multiple>
+      </div>
+      <div class="input-container">
+        <label for="documents">Documents (PDF only):</label>
+        <input type="file" id="documents" accept="application/pdf" multiple>
+      </div>
+      <div class="input-container">
+        <label for="links">Links:</label>
+        <input type="url" id="links" placeholder="Enter a URL">
+      </div>
+      <button type="button" id="submitButton">Submit Time Capsule</button>
+      <a href="nfts.html" id="nft">Wanna Add NFTs.....Click Here!!!</a>
+    </form>
+
+    <div class="preview-container" id="previewContainer" style="display: none;"></div>
+  </div>
+
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.min.js"></script>
+
+
+  <script src="extra.js"></script>
+  <!-- Vanta.js Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.net.min.js"></script>
+  <script>
+    // Initialize Vanta.NET with Blue Color
+    VANTA.NET({
+      el: "#vanta-bg", // Target the full-screen background div
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      color: 0x3498db, // Blue color
+      backgroundColor: 0x000000 // Black background
+    });
+  </script>
+</body>
+</html>

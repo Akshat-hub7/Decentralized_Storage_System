@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take NFT as Input</title>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.0/dist/ethers.umd.min.js"></script>
+    <style>
+        /* Reset default margin and padding for the whole page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .contain{
+            width: 30vw;
+            background-color: rgba(0,0,0,0.7);
+            padding: 50px;
+            border-radius: 1rem;
+            
+        }
+
+        body, html {
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            z-index: 1;
+            position: relative;
+        }
+
+        #nftDisplay {
+            z-index: 1;
+            position: relative;
+            color: aliceblue;
+        }
+
+        #connectWallet{
+            border-radius: 1rem;
+        }
+
+        #nftDisplay img {
+            max-width: 200px;
+            margin: 10px;
+        }
+
+        h1 {
+            z-index: 1;
+            position: relative;
+            color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="contain">
+        <h1>Take NFT From Wallet</h1>
+    <button id="connectWallet">Connect Wallet</button>
+    <div id="nftDisplay"></div>
+    </div>
+    <script src="nft.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.rings.min.js"></script>
+    <script>
+        VANTA.RINGS({
+            el: "body", // Target the background element
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+        });
+    </script>
+</body>
+</html>
