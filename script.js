@@ -148,3 +148,114 @@ submitButton.addEventListener('click', async () => {
     fileList.appendChild(listItem);
   }
 });
+
+
+// Add this code after the existing code
+
+const uploadJsonButton = document.createElement('button');
+uploadJsonButton.textContent = 'Upload JSON File';
+uploadJsonButton.id = 'uploadJsonButton';
+uploadJsonButton.style.marginTop = '20px';
+previewContainer.appendChild(uploadJsonButton);
+
+const fileInput = document.createElement('input');
+fileInput.type = 'file';
+fileInput.accept = '.json';
+fileInput.style.display = 'none';
+
+uploadJsonButton.addEventListener('click', () => {
+  fileInput.click();
+});
+
+fileInput.addEventListener('change', async (event) => {
+  try {
+    // Check MetaMask connection
+    if (typeof window.ethereum === 'undefined') {
+      alert('Please install MetaMask first!');
+      return;
+    }
+
+    // Request account access
+    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    const userAddress = accounts[0];
+    console.log('Connected account:', userAddress);
+
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      try {
+        const jsonData = JSON.parse(e.target.result);
+        const displayContainer = document.createElement('div');
+        displayContainer.id = 'restoredData';
+        displayContainer.style.marginTop = '20px';
+
+        jsonData.forEach(item => {
+          const itemDiv = document.createElement('div');
+          itemDiv.style.margin = '10px 0';
+          itemDiv.style.padding = '10px';
+          itemDiv.style.border = '1px solid #ccc';
+
+          switch(item.type) {
+            case 'Photo':
+              const img = document.createElement('img');
+              img.src = item.data;
+              img.style.maxWidth = '500px';
+              img.style.maxHeight = '400px';
+              itemDiv.appendChild(img);
+              break;
+
+            case 'Video':
+              const video = document.createElement('video');
+              video.src = item.data;
+              video.controls = true;
+              video.style.maxWidth = '640px';
+              video.style.maxHeight = '480px';
+              itemDiv.appendChild(video);
+              break;
+
+            case 'Document':
+              const docLink = document.createElement('a');
+              docLink.href = item.data;
+              docLink.textContent = `Download Document: ${item.fileName}`;
+              docLink.target = '_blank';
+              itemDiv.appendChild(docLink);
+              break;
+
+            case 'Link':
+              const link = document.createElement('a');
+              link.href = item.data;
+              link.textContent = item.data;
+              link.target = '_blank';
+              itemDiv.appendChild(link);
+              break;
+          }
+
+          const typeLabel = document.createElement('div');
+          typeLabel.textContent = `Type: ${item.type}`;
+          typeLabel.style.fontWeight = 'bold';
+          itemDiv.insertBefore(typeLabel, itemDiv.firstChild);
+          
+          displayContainer.appendChild(itemDiv);
+        });
+
+        // Add owner address display
+        const ownerInfo = document.createElement('div');
+        ownerInfo.textContent = `Capsule Owner: ${userAddress}`;
+        ownerInfo.style.marginBottom = '20px';
+        ownerInfo.style.color = '#666';
+        displayContainer.insertBefore(ownerInfo, displayContainer.firstChild);
+
+        previewContainer.appendChild(displayContainer);
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+        alert('Invalid JSON file format');
+      }
+    };
+    reader.readAsText(file);
+  } catch (error) {
+    console.error('Error processing file:', error);
+    alert('Error processing file. Please check the console for details.');
+  }
+});
